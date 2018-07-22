@@ -1,6 +1,6 @@
 import demographicsQuestions from "./demographics.js";
 
-const PORT = 7071;
+const PORT = 7072;
 const FULLSCREEN = false;
 
 export function getTrials(workerId='NA', assignmentId='NA', hitId='NA') {

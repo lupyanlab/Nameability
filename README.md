@@ -22,7 +22,7 @@ If you just need to build `prod/` , then use this command:
 npm run prod
 ```
 
-Then, go to http://localhost:7071
+Then, go to http://localhost:7072
 
 
 ## Switching from CSV to JSON and Vice Versa
