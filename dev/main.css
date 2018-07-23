@@ -70,3 +70,12 @@
     margin-right: auto;
     margin-top: 0;
 }
+
+.response-text-area {
+    outline: none;
+    width: 30em;
+    border: solid 0.01em;
+    margin-bottom:2em;
+    line-height: 1.25;
+    overflow: auto;
+}

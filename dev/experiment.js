@@ -99,94 +99,45 @@ function runExperiment(trials, workerId, assignmentId, hitId, PORT, FULLSCREEN) 
     // responses
     const trial_number = index + 1;
 
-    images.push("images/" + trial.pic1 + ".png");
-    images.push("images/" + trial.pic2 + ".png");
+    images.push("images/" + trial.Image);
 
     // Empty Response Data to be sent to be collected
     let response = {
       workerId: workerId,
       assignmentId: assignmentId,
       hitId: hitId,
-      seed: trial.seed,
-      Category: trial.Category,
-      Subcategory1: trial.Subcategory1,
-      Subcategory2: trial.Subcategory2,
-      firstStimPosition: trial.firstStimPosition,
-      secondStimPosition: trial.secondStimPosition,
-      pic1: trial.pic1,
-      pic2: trial.pic2,
+      set: trial.set,
+      ProblemType: trial.ProblemType,
+      PartID: trial.PartID,
+      Image: trial.Image,
       expTimer: -1,
       response: -1,
-      choice: 'error: no choice selected',
       trial_number: trial_number,
       rt: -1
     };
-
-    let leftPic;
-    let rightPic;
-    if (trial.firstStimPosition === 'left') {
-      leftPic = trial.pic1;
-    } else if (trial.firstStimPosition === 'right') {
-      rightPic = trial.pic1;
-    }
-
-    if (trial.secondStimPosition === 'left') {
-      leftPic = trial.pic2;
-    } else if (trial.secondStimPosition === 'right') {
-      rightPic = trial.pic2;
-    }
-
-    let stimulus = `
+    
+    const image = trial.Image;
+    
+    let stimulus = /*html*/`
         <h5 style="text-align:center;margin-bottom:20%;margin-top:0;">Trial ${trial_number} of ${num_trials}</h5>
         <div style="width:100%;">
-            <div style="width:50%;text-align:center;float:left;">
-                <img src="images/${leftPic}.png" alt="${leftPic}" height="200px" align="middle" style="max-width:400px;"/> 
-            </div>
-            <div style="width:50%;text-align:center;float:left;">
-                <img src="images/${rightPic}.png" alt="${rightPic}" height="200px" align="middle" style="max-width:400px;width=50%;" />
-            </div>
+          <img src="images/${image}" alt="${image}"/>   
         </div>
     `;
-
-    const choices = [
-      "Left image much more typical", 
-      "Left image slightly more typical", 
-      "Both images equally typical", 
-      "Right image slightly more typical", 
-      "Right image much more typical",
-    ];
     
-    let circles = choices.map(choice => {
-      return `
-        <div class="choice">
-          <div class="choice-circle empty-circle"></div>
-          <div class="text">${choice}</div>
-        </div>
-        `;
-    });
-
-    let prompt = `
-        <div class="bar">
-            ${circles.join("")}
-        </div>
-    `;
-
     // Picture Trial
-    let pictureTrial = {
-      type: "html-keyboard-response",
-      choices: choices.map((choice, index) => {
-        return `${index + 1}`;
-      }),
+    let jsPsychTrial = {
+      type: "text-area",
 
       stimulus: stimulus,
-
-      prompt: function() {
-        return prompt;
-      },
+      question: "Hello World",
+      placeholder: "Your answer here...",
+      trim_response_string: true,
 
       on_finish: function(data) {
-        response.response = String.fromCharCode(data.key_press);
-        response.choice = choices[Number(response.response)-1];
+        // response.response = String.fromCharCode(data.key_press);
+        // response.choice = choices[Number(response.response)-1];
+        response.response = data.response;
         response.rt = data.rt;
         response.expTimer = data.time_elapsed / 1000;
 
@@ -198,52 +149,13 @@ function runExperiment(trials, workerId, assignmentId, hitId, PORT, FULLSCREEN) 
           data: JSON.stringify(response),
           success: function() {
             console.log(response);
+            jsPsych.setProgressBar((progress_number - 1) / num_trials);
+            progress_number++;
           }
         });
       }
     };
-    timeline.push(pictureTrial);
-
-    // let subject view their choice
-    let breakTrial = {
-      type: "html-keyboard-response",
-      trial_duration: 500,
-      response_ends_trial: false,
-
-      stimulus: stimulus,
-
-      prompt: function() {
-        const circles = choices.map((choice, index) => {
-          if (choice == response.choice) {
-            return `
-                  <div class="choice">
-                    <div class="choice-circle filled-circle"></div>
-                    <div class="text">${choice}</div>
-                  </div>
-                `;
-          }
-          return `
-            <div class="choice">
-              <div class="choice-circle empty-circle"></div>
-              <div class="text">${choice}</div>
-            </div>
-            `;
-        });
-
-        const prompt = `
-            <div class="bar">
-                ${circles.join("")}
-            </div>
-        `;
-        return prompt;
-      },
-      
-      on_finish: function() {
-        jsPsych.setProgressBar((progress_number - 1) / num_trials);
-        progress_number++;
-      },
-    };
-    timeline.push(breakTrial);
+    timeline.push(jsPsychTrial);
   });
 
 
@@ -303,11 +215,7 @@ function runExperiment(trials, workerId, assignmentId, hitId, PORT, FULLSCREEN) 
     return loadImage(image)
     .catch((error) => {
       console.warn("Removing trial with image, " + image);
-
-      // there are twice the number of images than trials
-      // we set trial to null so we can cleanly remove
-      // it later
-      trials[index / 2] = null;
+      trials[index] = null;
     });
   }))
   .then((images) => {

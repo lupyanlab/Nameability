@@ -3,8 +3,8 @@
 You must have nodjs installed: https://nodejs.org. Make sure Python 2 is installed.
 
 ```
-git clone https://github.com/lupyanlab/TypicalityRatings
-cd TypicalityRatings
+git clone https://github.com/lupyanlab/Nameability
+cd Nameability
 npm install
 npm start
 ```
