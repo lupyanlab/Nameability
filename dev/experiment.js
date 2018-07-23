@@ -110,6 +110,7 @@ function runExperiment(trials, workerId, assignmentId, hitId, PORT, FULLSCREEN) 
       ProblemType: trial.ProblemType,
       PartID: trial.PartID,
       Image: trial.Image,
+      file: trial.file,
       expTimer: -1,
       response: -1,
       trial_number: trial_number,

@@ -49,53 +49,29 @@ app.listen(app.get("port"), function() {
 // POST endpoint for requesting trials
 app.post("/trials", function(req, res) {
   console.log("trials post request received");
-  let workerId = req.body.workerId;
-  console.log("workerId received is " + workerId);
 
-  if (fs.existsSync("trials/" + workerId + "_trials.csv")) {
-    let trials = [];
-    // Reads generated trial csv file
-    csv()
-      .fromFile("trials/" + workerId + "_trials.csv")
-      // Push all trials to array
-      .on("json", jsonObj => {
+  let subjCode = req.body.subjCode;
+  console.log(req.body);
+  let trials = [];
+  fs.readdir('./trials', (err, filenames) => {
+    let filename = filenames[Math.floor(Math.random()*filenames.length)];
+    csv({delimiter: ','})
+    .fromFile('./trials/'+filename)
+    .on('json',(jsonObj)=>{
         trials.push(jsonObj);
-      })
-      // Send trials array when finished
-      .on("done", error => {
-        if (error) {
-          res.status(500).send({ success: false });
-          throw error;
-        }
-        res.send({ success: true, trials: trials });
-        console.log("finished parsing csv");
+    })
+    .on('done',(error)=>{
+      if (error) {
+        console.error(error);
+        throw error;
+      }
+      trials.forEach((trial) => {
+        trial.file = filename;
       });
-  } else {
-    // Runs genTrial python script with workerId arg
-    PythonShell.defaultOptions = { args: [workerId] };
-    PythonShell.run("generateTrials.py", function(err, results) {
-      if (err) throw err;
-      let trials = [];
-  
-      // Reads generated trial csv file
-      csv()
-        .fromFile("trials/" + workerId + "_trials.csv")
-        // Push all trials to array
-        .on("json", jsonObj => {
-          trials.push(jsonObj);
-        })
-        // Send trials array when finished
-        .on("done", error => {
-          if (error) {
-            res.status(500).send({ success: false });
-            throw error;
-          }
-          res.send({ success: true, trials: trials });
-          console.log("finished parsing csv");
-        });
-    });
-  }
-
+      console.log(trials)
+      res.send({ success: true, trials: trials });
+    })
+  })
 });
 
 
