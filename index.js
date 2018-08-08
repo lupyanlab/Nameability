@@ -50,7 +50,7 @@ app.listen(app.get("port"), function() {
 app.post("/trials", function(req, res) {
   console.log("trials post request received");
 
-  let subjCode = req.body.subjCode;
+  let subjCode = req.body.workerId;
   console.log(req.body);
   let trials = [];
   fs.readdir('./trials', (err, filenames) => {

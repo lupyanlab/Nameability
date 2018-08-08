@@ -3,7 +3,7 @@ import demographicsQuestions from "./demographics.js";
 const PORT = 7072;
 const FULLSCREEN = false;
 
-export function getTrials(workerId='NA', assignmentId='NA', hitId='NA') {
+export function getTrials(workerId='NA', assignmentId='NA', hitId='NA', setnum=1) {
   
   $("#loading").html('Loading trials... please wait. </br> <img src="img/preloader.gif">')
   
@@ -13,7 +13,7 @@ export function getTrials(workerId='NA', assignmentId='NA', hitId='NA') {
       url: 'http://'+document.domain+':'+PORT+'/trials',
       type: 'POST',
       contentType: 'application/json',
-      data: JSON.stringify({workerId: workerId}),
+      data: JSON.stringify({workerId: workerId, setnum: setnum}),
       success: function (data) {
           console.log(data);
           $("#loading").remove();
@@ -133,6 +133,7 @@ function runExperiment(trials, workerId, assignmentId, hitId, PORT, FULLSCREEN) 
       stimulus: stimulus,
       question: "Please describe the highlighted image",
       placeholder: "Your answer here...",
+      min_chars_required: 3,
       trim_response_string: true,
 
       on_finish: function(data) {

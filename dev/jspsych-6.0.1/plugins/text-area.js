@@ -16,10 +16,14 @@ jsPsych.plugins["text-area"] = (function() {
         type: jsPsych.plugins.parameterType.STRING,
         default_value: ''
       },
+      min_chars_required: {
+	type: jsPsych.plugins.parameterType.INT,
+	default_value: 0
+      },
       trim_response_string: {
         type: jsPsych.plugins.parameterType.BOOL,
         default_value: ''
-      }
+      },
     }
   };
 
@@ -53,6 +57,10 @@ jsPsych.plugins["text-area"] = (function() {
 		let response = response_text_area.value;
 		if (trial.trim_response_string) {
 			response = response.trim();
+		}
+		if (response.length < trial.min_chars_required) {
+			alert(`Please enter a response with ${trial.min_chars_required} or more letters.`);
+			return;
 		}
 		const end_time = Date.now();
 		const rt = end_time - start_time;
