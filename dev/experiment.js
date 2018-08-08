@@ -131,7 +131,7 @@ function runExperiment(trials, workerId, assignmentId, hitId, PORT, FULLSCREEN) 
       type: "text-area",
 
       stimulus: stimulus,
-      question: "Hello World",
+      question: "Please describe the highlighted image",
       placeholder: "Your answer here...",
       trim_response_string: true,
 
