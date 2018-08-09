@@ -14,18 +14,17 @@ def generateTrials(runTimeVars,runTimeVarsOrder):
 	seed = int(runTimeVars['seed'])
 	random.seed(seed)
 	setnum = int(runTimeVars['setnum'])
-	images = pd.read_csv('filesdoc_sets.csv')
 	
 	if setnum == 1:
-		images = images[images.setnum == 1]
+		images = pd.read_csv('filesdoc_set1.csv')
 	elif setnum == 3:
-		images = images[images.setnum == 3]
+		images = pd.read_csv('filesdoc_set3.csv')
 	elif setnum == 5:
-		images = images[images.setnum == 5]	
+		images = pd.read_csv('filesdoc_set5.csv')
 	elif setnum == 7:
-		images = images[images.setnum == 7]
+		images = pd.read_csv('filesdoc_set7.csv')
 	else:
-		images = images[images.setnum == 1]
+		images = pd.read_csv('filesdoc_set1.csv')
 		
 	stim_list = images.Image.tolist()
 	trials = []
@@ -51,9 +50,6 @@ def generateTrials(runTimeVars,runTimeVarsOrder):
 		
 if __name__ == "__main__":
     trialList = generateTrials({'workerId':sys.argv[1]},['workerId'], {'setnum':sys.argv[2]},['setnum'])
- #	trialList = generateTrials({'subjCode':'NBT_set3a', 'gender':'f', 'seed':4, 'setnum':'3'},['subjCode','gender','seed', 'setnum'])
- #	trialList = generateTrials({'subjCode':'NBT_set7a', 'gender':'f', 'seed':4, 'setnum':'7'},['subjCode','gender','seed', 'setnum'])
- #	trialList = generateTrials({'subjCode':'NBT_set5a', 'gender':'f', 'seed':4, 'setnum':'5'},['subjCode','gender','seed', 'setnum'])
 	
 
 
