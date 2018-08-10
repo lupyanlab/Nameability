@@ -79,8 +79,8 @@ function runExperiment(trials, workerId, assignmentId, hitId, PORT, FULLSCREEN) 
     key_forward: 'space',
     key_backward: 'backspace',
     pages: [
-      `<p>On each page you will see two pictures from the same category e.g., two cats. Your task is simply to decide which of the two pictures is the best example of your idea or image of what the category is. The categories you will see are <b>cats, dogs, birds, fish, cars, trains, planes and boats</b>.
-      <p><b>Use the keys 1-5 to respond</b>. You will be asked to about 225 judgments. Estimated total time is 5-6 minutes. At the end, you will get a completion code.
+      `<p>Your task is to describe the image that is inside the red rectangle so that someone else can pick it out from a selection of the other images when shown your description.  <b>Please make your description as short and simple as possible, while ensuring that the description could not be confused with any of the other images. </b>.
+      <p><b>If any of the other images are the same, you do not need to worry about distinguishing your description from these items.</b>. You will be asked to make a total of 60 descriptions. Please answer carefully to all items. Some images may be simpler to describe than others. Responding randomly or carelessly will result in a decline in payment At the end, you will get a completion code.
             </p> ${continue_space}`
     ]
   };
