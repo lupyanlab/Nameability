@@ -111,6 +111,7 @@ function runExperiment(trials, workerId, assignmentId, hitId, PORT, FULLSCREEN) 
       PartID: trial.PartID,
       Image: trial.Image,
       file: trial.file,
+      Message: trial.Message,
       expTimer: -1,
       response: -1,
       trial_number: trial_number,
@@ -131,7 +132,7 @@ function runExperiment(trials, workerId, assignmentId, hitId, PORT, FULLSCREEN) 
       type: "text-area",
 
       stimulus: stimulus,
-      question: "Please describe the highlighted image",
+      question: trial.Message,
       placeholder: "Your answer here...",
       min_chars_required: 3,
       trim_response_string: true,
