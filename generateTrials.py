@@ -8,7 +8,7 @@ separator = ","
 																					
 def generateTrials(workerId,setnum):
 	setnum = int(setnum)
-	testFile = open('trials/trialList_test_'+workerId+ '.csv','w')
+	testFile = open('trials/'+workerId+ '_trials.csv','w')
 	header = separator.join(["workerId", "setnum", "ProblemType", "PartID", "Image", "trialNum", "Message"])
 	print >>testFile, header
 	images = pd.read_csv('filesdoc_sets.csv')
@@ -31,7 +31,7 @@ def generateTrials(workerId,setnum):
 		print >>testFile, cur_trial
 		
 if __name__ == "__main__":
-    trialList = generateTrials(sys.argv[1], sys.argv[2])
+	trialList = generateTrials(sys.argv[1], sys.argv[2])
 
 
 
