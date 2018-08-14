@@ -1,5 +1,5 @@
 Image,PartID,ProblemType,Prob,Message,setnum
-2s_C1.png,2,C1,a,e ,1
+2s_C1.png,2,C1,a,Please name the highlighted shape so it can be distinguished from all other unique images. Use as few words as possible.,1
 1s_C2.png,1,C2,b,Please name the highlighted shape so it can be distinguished from all other unique images. Use as few words as possible.,1
 3s_C3.png,3,C3,c,Please name the highlighted shape so it can be distinguished from all other unique images. Use as few words as possible.,1
 5s_C4.png,5,C4,d,Please name the highlighted shape so it can be distinguished from all other unique images. Use as few words as possible.,1

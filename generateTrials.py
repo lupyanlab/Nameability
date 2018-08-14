@@ -19,7 +19,7 @@ def generateTrials(workerId,setnum):
 	stim_list = images.Image.tolist()
 	trials = []
 
-	selected_images = random.sample(stim_list,60)
+	selected_images = random.sample(stim_list,72)
 	print selected_images
 	for trial_num,cur_image in enumerate(selected_images):
 		subC1 = images.loc[images['Image'] == cur_image, 'ProblemType'].iloc[0]	
