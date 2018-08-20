@@ -9,7 +9,7 @@ separator = ","
 def generateTrials(workerId,setnum):
 	setnum = int(setnum)
 	testFile = open('trials/'+workerId+ '_trials.csv','w')
-	header = separator.join(["workerId", "setnum", "ProblemType", "PartID", "Image", "trialNum", "Message"])
+	header = separator.join(["workerId", "setnum", "ProblemType", "PartID", "Image", "trialNum", "Message", "Nameability", "Version"])
 	print >>testFile, header
 	images = pd.read_csv('filesdoc_sets.csv')
 	if setnum in images.setnum.unique():
@@ -23,7 +23,9 @@ def generateTrials(workerId,setnum):
 		subC1 = images.loc[images['Image'] == cur_image, 'ProblemType'].iloc[0]	
 		PartID1 = images.loc[images['Image'] == cur_image, 'PartID'].iloc[0]	
 		Message = images.loc[images['Image'] == cur_image, 'Message'].iloc[0]	
-		trials.append(separator.join((str(workerId),str(setnum),str(subC1), str(PartID1), cur_image, str(trial_num+1), str(Message))))	 
+		Nameability = images.loc[images['Image'] == cur_image, 'Nameability'].iloc[0]	
+		Version = images.loc[images['Image'] == cur_image, 'Version'].iloc[0]	
+		trials.append(separator.join((str(workerId),str(setnum),str(subC1), str(PartID1), cur_image, str(trial_num+1), str(Message),  str(Nameability),  str(Version))))	 
 	
 	for cur_trial in trials:
 		print >>testFile, cur_trial
