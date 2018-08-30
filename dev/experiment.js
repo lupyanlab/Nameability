@@ -3,7 +3,7 @@ import demographicsQuestions from "./demographics.js";
 const PORT = 7072;
 const FULLSCREEN = false;
 
-export function getTrials(workerId='NA', assignmentId='NA', hitId='NA', setnum=1) {
+export function getTrials(workerId='NA', assignmentId='NA', hitId='NA', setnum='NA') {
   
   $("#loading").html('Loading trials... please wait. </br> <img src="img/preloader.gif">')
   
@@ -121,7 +121,7 @@ function runExperiment(trials, workerId, assignmentId, hitId, PORT, FULLSCREEN) 
     const image = trial.Image;
     
     let stimulus = /*html*/`
-        <h5 style="text-align:center;margin-bottom:20%;margin-top:0;">Trial ${trial_number} of ${num_trials}</h5>
+        <h5 style="text-align:center;margin-bottom:5%;margin-top:0;">Trial ${trial_number} of ${num_trials}</h5>
         <div style="width:100%;">
           <img src="images/${image}" alt="${image}"/>   
         </div>
