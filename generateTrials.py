@@ -7,24 +7,22 @@ import pandas as pd
 separator = ","
 																					
 def generateTrials(workerId,setnum):
-	#setnum = int(setnum)
-	testFile = open('trials/'+workerId+ '_trials.csv','w')
-	header = separator.join(["workerId", "setnum", "ProblemType", "PartID", "Image", "trialNum", "Message", "Nameability", "Version"])
-	print >>testFile, header
 	images = pd.read_csv('filesdoc_sets.csv')
 	if setnum=='NA':
 		setnum = random.choice(images.setnum.unique())
 		images = images[images.setnum == setnum]
 	elif int(setnum) in images.setnum.unique():
 		images = images[images.setnum == int(setnum)]
-		print "setnum is", setnum
-		print len(images)
 	else:
-		print "Setnum must be one of ", str(images.setnum.unique())
-	print "setnum is", setnum
+		sys.exit("Setnum must be one of "+ str(images.setnum.unique()))
 	stim_list = images.Image.tolist()
-	trials = []
+	print "setnum is", setnum, 'using', len(images), 'images'
+	testFile = open('trials/'+workerId+ '_trials.csv','w')
 
+	header = separator.join(["workerId", "setnum", "ProblemType", "PartID", "Image", "trialNum", "Message", "Nameability", "Version"])
+	print >>testFile, header
+
+	trials = []
 	for trial_num,cur_image in enumerate(stim_list):
 		subC1 = images.loc[images['Image'] == cur_image, 'ProblemType'].iloc[0]	
 		PartID1 = images.loc[images['Image'] == cur_image, 'PartID'].iloc[0]	
