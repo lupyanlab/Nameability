@@ -16,7 +16,7 @@ def generateTrials(workerId,setnum):
 	else:
 		sys.exit("Setnum must be one of "+ str(images.setnum.unique()))
 	stim_list = images.Image.tolist()
-	print "setnum is", setnum, 'using', len(images), 'images'
+	print setnum
 	testFile = open('trials/'+workerId+ '_trials.csv','w')
 
 	header = separator.join(["workerId", "setnum", "ProblemType", "PartID", "Image", "trialNum", "Message", "Nameability", "Version"])
