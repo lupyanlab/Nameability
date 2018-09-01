@@ -195,10 +195,7 @@ function runExperiment(trials, workerId, assignmentId, hitId, setnum, PORT, FULL
   let endmessage = `Thank you for participating! Your completion code is ${participantID}. Copy and paste this in 
         MTurk to get paid. 
 
-        <p>The purpose of this HIT is to assess the extent to which different people agree what makes
-        a particular dog, cat, or car typical.
-        
-        <p>
+    <p>
         If you have any questions or comments, please email hroebuck@wisc.edu.`;
           jsPsych.endExperiment(endmessage);
       }
@@ -208,10 +205,7 @@ function runExperiment(trials, workerId, assignmentId, hitId, setnum, PORT, FULL
   let endmessage = `Thank you for participating! Your completion code is ${participantID}. Copy and paste this in 
         MTurk to get paid. 
 
-        <p>The purpose of this HIT is to assess the extent to which different people agree what makes
-        a particular dog, cat, or car typical.
-        
-        <p>
+<p>
         If you have any questions or comments, please email hroebuck@wisc.edu.`;
 
     
