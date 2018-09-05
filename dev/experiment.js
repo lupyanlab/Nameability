@@ -18,7 +18,7 @@ export function getTrials(workerId='NA', assignmentId='NA', hitId='NA', setnum='
           console.log(data);
           $("#loading").remove();
   
-          runExperiment(data.trials, workerId, assignmentId, hitId, setnum, PORT, FULLSCREEN);
+          runExperiment(data.trials, workerId, assignmentId, hitId, PORT, FULLSCREEN);
       }
   })
 }
@@ -32,7 +32,7 @@ function disableScrollOnSpacebarPress () {
 }
 
 // Function Call to Run the experiment
-function runExperiment(trials, workerId, assignmentId, hitId, setnum, PORT, FULLSCREEN) {
+function runExperiment(trials, workerId, assignmentId, hitId, PORT, FULLSCREEN) {
   disableScrollOnSpacebarPress();
 
   let timeline = [];
@@ -112,7 +112,7 @@ function runExperiment(trials, workerId, assignmentId, hitId, setnum, PORT, FULL
       Image: trial.Image,
       file: trial.file,
       Message: trial.Message,
-      setnum: setnum,
+      setnum: trial.setnum,
       expTimer: -1,
       response: -1,
       trial_number: trial_number,
