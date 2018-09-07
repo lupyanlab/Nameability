@@ -18,7 +18,7 @@ export function getTrials(workerId='NA', assignmentId='NA', hitId='NA', setnum='
           console.log(data);
           $("#loading").remove();
   
-          runExperiment(data.trials, workerId, assignmentId, hitId, setnum, PORT, FULLSCREEN);
+          runExperiment(data.trials, workerId, assignmentId, hitId, PORT, FULLSCREEN);
       }
   })
 }
@@ -32,7 +32,7 @@ function disableScrollOnSpacebarPress () {
 }
 
 // Function Call to Run the experiment
-function runExperiment(trials, workerId, assignmentId, hitId, setnum, PORT, FULLSCREEN) {
+function runExperiment(trials, workerId, assignmentId, hitId, PORT, FULLSCREEN) {
   disableScrollOnSpacebarPress();
 
   let timeline = [];
@@ -80,7 +80,7 @@ function runExperiment(trials, workerId, assignmentId, hitId, setnum, PORT, FULL
     key_backward: 'backspace',
     pages: [
       `<p>Your task is to describe the image that is inside the red rectangle so that someone else can pick it out from a selection of the other images when shown your description.  <b>Please make your description as short and simple as possible, while ensuring that the description could not be confused with any of the other images. </b>
-      <p><b>If any of the other images are the same, you do not need to worry about distinguishing your description from these items.</b> You will be asked to make a total of 72 descriptions. Please answer carefully to all items. Some images may be simpler to describe than others. Responding randomly or carelessly will result in a decline in payment. At the end, you will get a completion code. <p> <img src="img/demo.png" style="width:355px;height:230px;"> <p>  <b> Example 1 </b> <p> Here you could simply respond:  <b> Circle.  </b>  <p> <img src="img/demo2.png" style="width:355px;height:230px;"> <p> <b> Example 2 </b> <p> For this example you might say:  <b> Three thick vertical lines.  </b> <p> <b> DO NOT use the location of the red rectangle for your description i.e., 'top right'. Your description must be understood even if the order of the images are mixed. </b> <p>
+      <p><b>If any of the other images are the same, you do not need to worry about distinguishing your description from these items.</b> You will be asked to make a total of 30 descriptions. Please answer carefully to all items. Some images may be simpler to describe than others. Responding randomly or carelessly will result in a decline in payment. At the end, you will get a completion code. <p> <img src="img/demo.png" style="width:355px;height:230px;"> <p>  <b> Example 1 </b> <p> Here you could simply respond:  <b> Circle.  </b>  <p> <img src="img/demo2.png" style="width:355px;height:230px;"> <p> <b> Example 2 </b> <p> For this example you might say:  <b> Three thick vertical lines.  </b> <p> <b> DO NOT use the location of the red rectangle for your description i.e., 'top right'. Your description must be understood even if the order of the images are mixed. </b> <p>
             </p> ${continue_space}`
     ]
   };
@@ -112,7 +112,7 @@ function runExperiment(trials, workerId, assignmentId, hitId, setnum, PORT, FULL
       Image: trial.Image,
       file: trial.file,
       Message: trial.Message,
-      setnum: setnum,
+      setnum: trial.setnum,
       expTimer: -1,
       response: -1,
       trial_number: trial_number,
