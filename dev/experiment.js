@@ -142,7 +142,7 @@ function runExperiment(trials, workerId, assignmentId, hitId, setnum, PORT, FULL
         // response.response = String.fromCharCode(data.key_press);
         // response.choice = choices[Number(response.response)-1];
         response.response = data.response;
-        response.rt = data.rt;
+        response.rt = data.time_elapsed;
         response.expTimer = data.time_elapsed / 1000;
 
         // POST response data to server
